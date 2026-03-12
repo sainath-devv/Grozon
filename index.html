@@ -1,0 +1,1652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grozon</title>
+  <!-- Google Fonts: Inter + Space Grotesk + Poppins for logo -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Space+Grotesk:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  <!-- Material Symbols -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0,0" />
+  <style>
+    .ms {
+      font-family: 'Material Symbols Outlined';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 24px;
+      line-height: 1;
+      letter-spacing: normal;
+      text-transform: none;
+      display: inline-block;
+      white-space: nowrap;
+      word-wrap: normal;
+      direction: ltr;
+      -webkit-font-smoothing: antialiased;
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      vertical-align: middle;
+    }
+    
+    :root {
+      --blue: #1a73e8;
+      --red: #ea4335;
+      --yellow: #fbbc04;
+      --green: #34a853;
+      --blue-lt: #e8f0fe;
+      --red-lt: #fce8e6;
+      --yellow-lt: #fef7e0;
+      --green-lt: #e6f4ea;
+      --ink: #202124;
+      --ink2: #3c4043;
+      --muted: #5f6368;
+      --surface: #f8f9fa;
+      --white: #ffffff;
+      --border: #e8eaed;
+      
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-display: 'Space Grotesk', 'Inter', sans-serif;
+      --font-logo: 'Poppins', 'Space Grotesk', sans-serif;
+      
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-xl: 28px;
+      --shadow-sm: 0 2px 8px rgba(0,0,0,0.03), 0 2px 4px rgba(0,0,0,0.02);
+      --shadow-md: 0 8px 24px rgba(0,0,0,0.05), 0 2px 6px rgba(0,0,0,0.02);
+      --shadow-lg: 0 18px 40px rgba(0,0,0,0.06);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-sans);
+      background: var(--white);
+      color: var(--ink);
+      line-height: 1.5;
+    }
+
+    /* ===== HIDE SCROLLBAR FOR ALL CAROUSELS ===== */
+    .carousel-track {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .carousel-track::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* ===== ZIGZAG HORIZONTAL STRIPES FOR EACH SECTION ===== */
+    .section {
+      padding: 85px 24px;
+      position: relative;
+      isolation: isolate;
+    }
+    
+    /* Zigzag pattern helper */
+    .section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-size: 40px 40px;
+      background-repeat: repeat;
+      opacity: 0.5;
+      pointer-events: none;
+      z-index: -1;
+    }
+    
+    /* Section 1: Guidance - small horizontal zigzag */
+    #guidance.section::before {
+      background-image: 
+        linear-gradient(45deg, rgba(0, 0, 0, 0.03) 25%, transparent 85%),
+        linear-gradient(-45deg, rgba(0, 0, 0, 0.03) 25%, transparent 25%);
+      background-size: 20px 20px;
+      background-position: 0 0, 0 10px;
+    }
+    
+    /* Section 2: Careers - vertical zigzag stripes */
+    #careers.section::before {
+      background-image: 
+        repeating-linear-gradient(
+          90deg,
+          rgba(0, 0, 0, 0.02) 0px,
+          rgba(0, 0, 0, 0.02) 4px,
+          transparent 4px,
+          transparent 12px
+        ),
+        repeating-linear-gradient(
+          0deg,
+          rgba(0, 0, 0, 0.08) 0px,
+          rgba(0, 0, 0, 0.08) 2px,
+          transparent 2px,
+          transparent 8px
+        );
+    }
+    
+    /* Section 3: AI - diagonal zigzag pattern */
+    #ai.section::before {
+      background-image: 
+        linear-gradient(135deg, rgba(0, 0, 0, 0.0) 25%, transparent 25%),
+        linear-gradient(225deg, rgba(0, 0, 0, 0.02) 25%, transparent 25%),
+        linear-gradient(315deg, rgba(0, 0, 0, 0.02) 25%, transparent 25%),
+        linear-gradient(45deg, rgba(0, 0, 0, 0.02) 25%, transparent 25%);
+      background-size: 30px 30px;
+      background-position: 0 0, 0 15px, 15px -15px, -15px 0;
+    }
+    
+    /* Section 4: Python - crosshatch zigzag */
+    #python.section::before {
+      background-image: 
+        repeating-linear-gradient(
+          45deg,
+          rgba(0, 0, 0, 0.02) 0px,
+          rgba(0, 0, 0, 0.02) 2px,
+          transparent 2px,
+          transparent 8px
+        ),
+        repeating-linear-gradient(
+          -45deg,
+          rgba(0, 0, 0, 0.08) 0px,
+          rgba(0, 0, 0, 0.08) 2px,
+          transparent 2px,
+          transparent 8px
+        );
+    }
+    
+    /* Section 5: Mentors - dotted zigzag grid */
+    #mentors.section::before {
+      background-image: 
+        radial-gradient(circle at 10px 10px, rgba(0, 0, 0, 0.02) 2px, transparent 2px),
+        radial-gradient(circle at 30px 30px, rgba(0, 0, 0, 0.02) 2px, transparent 2px);
+      background-size: 40px 40px;
+    }
+    
+    /* Hero with horizontal zigzag stripes */
+    .hero {
+      background: linear-gradient(145deg, var(--surface) 0%, white 100%);
+      padding: 70px 24px 80px;
+      position: relative;
+      isolation: isolate;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: 
+        repeating-linear-gradient(
+          0deg,
+          rgba(0, 0, 0, 0.04) 0px,
+          rgba(0, 0, 0, 0.04) 2px,
+          transparent 2px,
+          transparent 10px
+        ),
+        repeating-linear-gradient(
+          90deg,
+          rgba(26, 115, 232, 0.02) 0px,
+          rgba(26, 115, 232, 0.02) 1px,
+          transparent 1px,
+          transparent 20px
+        );
+      pointer-events: none;
+      z-index: -1;
+    }
+    
+    /* Stats strip with subtle zigzag */
+    .stats-strip {
+      background: var(--white);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 32px 24px;
+      position: relative;
+      isolation: isolate;
+    }
+    .stats-strip::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: 
+        repeating-linear-gradient(
+          -45deg,
+          rgba(0, 0, 0, 0.02) 0px,
+          rgba(0, 0, 0, 0.02) 1px,
+          transparent 1px,
+          transparent 6px
+        );
+      pointer-events: none;
+    }
+    
+    /* CTA with glowing zigzag effect */
+    .cta-section {
+      background: var(--ink);
+      padding: 90px 24px;
+      text-align: center;
+      position: relative;
+      isolation: isolate;
+    }
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: 
+        repeating-linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.03) 0px,
+          rgba(255, 255, 255, 0.03) 4px,
+          transparent 4px,
+          transparent 16px
+        ),
+        repeating-linear-gradient(
+          45deg,
+          rgba(26, 115, 232, 0.1) 0px,
+          rgba(26, 115, 232, 0.1) 2px,
+          transparent 2px,
+          transparent 12px
+        );
+      pointer-events: none;
+      z-index: 0;
+    }
+    
+    /* Footer with dark zigzag */
+    .footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 60px 24px 40px;
+      position: relative;
+      isolation: isolate;
+    }
+    .footer::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: 
+        repeating-linear-gradient(
+          90deg,
+          rgba(0, 0, 0, 0.03) 0px,
+          rgba(0, 0, 0, 0.03) 2px,
+          transparent 2px,
+          transparent 10px
+        ),
+        repeating-linear-gradient(
+          0deg,
+          rgba(0, 0, 0, 0.02) 0px,
+          rgba(0, 0, 0, 0.02) 1px,
+          transparent 1px,
+          transparent 8px
+        );
+      pointer-events: none;
+    }
+
+    /* Navigation */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 32px;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      font-family: var(--font-logo);
+      font-size: 24px;
+      font-weight: 50;
+      text-decoration: none;
+      color: var(--ink);
+      letter-spacing: -0.3px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo span { color: var(--blue); }
+    .logo-img {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--blue);
+      font-size: 20px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 8px;
+      list-style: none;
+      align-items: center;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 15px;
+      font-weight: 500;
+      padding: 8px 16px;
+      border-radius: 40px;
+      transition: 0.15s;
+    }
+    .nav-links a:hover {
+      background: var(--blue-lt);
+      color: var(--blue);
+    }
+    .nav-cta {
+      background: var(--blue) !important;
+      color: white !important;
+      padding: 10px 24px !important;
+      font-weight: 600 !important;
+    }
+
+    /* Hero */
+    .hero-inner {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--blue-lt);
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 20px;
+      border-radius: 40px;
+      margin-bottom: 28px;
+    }
+    .hero-title {
+      font-family: var(--font-display, sans-serif);
+      font-size: 88px;
+      font-weight: 700;
+      line-height: 1.0;
+      letter-spacing: -3px;
+      color: var(--ink);
+      margin-bottom: 30px;
+    }
+    .hero-title .g-blue { color: var(--blue); }
+    .hero-desc {
+      font-size: 18px;
+      color: var(--muted);
+      margin-bottom: 36px;
+      max-width: 550px;
+      margin: 0 auto 36px;
+    }
+    .hero-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 40px;
+    }
+    .hero-pill {
+      font-size: 14px;
+      font-weight: 500;
+      padding: 8px 22px;
+      border-radius: 40px;
+    }
+    .hero-pill.blue { background: var(--blue-lt); color: var(--blue); }
+    .hero-pill.red { background: var(--red-lt); color: var(--red); }
+    .hero-pill.yellow { background: var(--yellow-lt); color: #b06000; }
+    .hero-pill.green { background: var(--green-lt); color: #1e7e3e; }
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .btn-primary {
+      background: var(--blue);
+      color: white;
+      padding: 14px 32px;
+      border-radius: 40px;
+      font-size: 16px;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: 0.15s;
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--blue);
+      padding: 14px 32px;
+      border-radius: 40px;
+      font-size: 16px;
+      font-weight: 600;
+      text-decoration: none;
+      border: 2px solid var(--blue);
+    }
+
+    /* Stats */
+    .stats-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      position: relative;
+      z-index: 1;
+    }
+    .stat-item {
+      text-align: center;
+      padding: 0 24px;
+      border-right: 1px solid var(--border);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-num {
+      font-family: var(--font-display);
+      font-size: 42px;
+      font-weight: 600;
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+    .stat-item:nth-child(1) .stat-num { color: var(--blue); }
+    .stat-item:nth-child(2) .stat-num { color: var(--red); }
+    .stat-item:nth-child(3) .stat-num { color: var(--yellow); }
+    .stat-item:nth-child(4) .stat-num { color: var(--green); }
+    .stat-label {
+      font-size: 14px;
+      color: var(--muted);
+      font-weight: 500;
+      text-transform: uppercase;
+    }
+
+    /* Section headers */
+    .section-inner { max-width: 1280px; margin: 0 auto; position: relative; z-index: 1; }
+    .section-head { margin-bottom: 40px; }
+    .eyebrow {
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 42px;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: -0.5px;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+    .section-sub {
+      font-size: 17px;
+      color: var(--muted);
+      max-width: 600px;
+    }
+
+    /* ===== CAROUSEL STYLES (scrollbar hidden) ===== */
+    .carousel-container {
+      position: relative;
+      margin-top: 20px;
+    }
+    .carousel-hint {
+      text-align: right;
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+    .carousel-track {
+      display: flex;
+      gap: 24px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding: 8px 4px 24px 4px;
+      cursor: grab;
+      -webkit-overflow-scrolling: touch;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .carousel-track::-webkit-scrollbar {
+      display: none;
+    }
+    .carousel-track:active { cursor: grabbing; }
+    .carousel-card {
+      flex: 0 0 300px;
+      scroll-snap-align: start;
+      background: white;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border);
+      transition: 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+    .carousel-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--blue);
+    }
+
+    /* Guidance card */
+    .guidance-card {
+      padding: 32px 28px;
+    }
+    .guidance-card .card-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      margin-bottom: 22px;
+      background: var(--blue-lt);
+      color: var(--blue);
+    }
+    .guidance-card .badge {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 5px 14px;
+      border-radius: 40px;
+      background: var(--blue-lt);
+      color: var(--blue);
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      margin-bottom: 16px;
+    }
+    .guidance-card h3 {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .guidance-card p {
+      font-size: 15px;
+      color: var(--muted);
+      margin-bottom: 24px;
+      line-height: 1.6;
+      flex: 1;
+    }
+    .guidance-features {
+      list-style: none;
+      border-top: 1px solid var(--border);
+      padding-top: 20px;
+      margin-bottom: 24px;
+    }
+    .guidance-features li {
+      font-size: 14px;
+      color: var(--ink2);
+      padding: 6px 0;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .guidance-features li .ms { color: var(--green); font-size: 18px; }
+    .card-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--blue);
+      text-decoration: none;
+      border-top: 1px solid var(--border);
+      padding-top: 20px;
+      margin-top: auto;
+      transition: gap 0.2s;
+    }
+    .card-btn:hover { gap: 14px; }
+
+    /* Career card */
+    .career-card-image {
+      height: 160px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+    .career-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(0deg, rgba(0,0,0,0.5) 0%, transparent 70%);
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      padding: 20px;
+    }
+    .career-badge {
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(8px);
+      padding: 6px 16px;
+      border-radius: 40px;
+      font-size: 12px;
+      font-weight: 600;
+      color: white;
+    }
+    .career-number {
+      font-family: var(--font-display);
+      font-size: 42px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.3);
+    }
+    .career-content {
+      padding: 24px 24px 28px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .career-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+    .career-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 16px;
+      background: var(--blue-lt);
+      color: var(--blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+    }
+    .career-content h3 {
+      font-size: 22px;
+      font-weight: 700;
+    }
+    .career-desc {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 18px;
+      flex: 1;
+    }
+    .career-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 20px;
+    }
+    .career-tag {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 40px;
+      background: var(--blue-lt);
+      color: var(--blue);
+    }
+    .career-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--border);
+      padding-top: 18px;
+    }
+    .career-meta {
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 500;
+    }
+    .career-link {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--blue-lt);
+      color: var(--blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.2s;
+    }
+    .carousel-card:hover .career-link {
+      background: var(--blue);
+      color: white;
+      transform: translateX(4px);
+    }
+
+    /* AI card */
+    .ai-img {
+      height: 150px;
+      overflow: hidden;
+    }
+    .ai-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: 0.4s;
+    }
+    .carousel-card:hover .ai-img img { transform: scale(1.05); }
+    .ai-body {
+      padding: 24px 24px 26px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .ai-body h4 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .ai-skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+    .ai-skill {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 40px;
+      background: var(--blue-lt);
+      color: var(--blue);
+    }
+    .ai-body p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 18px;
+      flex: 1;
+    }
+    .ai-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--border);
+      padding-top: 18px;
+    }
+    .ai-weeks {
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .ai-link {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--blue);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    /* Python card */
+    .python-card {
+      padding: 28px 24px;
+    }
+    .python-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 18px;
+      background: var(--blue-lt);
+      color: var(--blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      margin-bottom: 20px;
+    }
+    .python-card h4 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .python-card p {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 24px;
+      flex: 1;
+    }
+    .python-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--border);
+      padding-top: 18px;
+      margin-top: auto;
+    }
+    .python-meta {
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .python-arrow {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--blue-lt);
+      color: var(--blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.2s;
+    }
+    .carousel-card:hover .python-arrow {
+      background: var(--blue);
+      color: white;
+      transform: translateX(4px);
+    }
+
+    /* Mentor card - redesigned to show name and company on image */
+    .mentor-card {
+      position: relative;
+      width: 100%;
+      height: 350px;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+    }
+    .mentor-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s;
+    }
+    .carousel-card:hover .mentor-img {
+      transform: scale(1.05);
+    }
+    .mentor-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(0deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 70%, transparent 100%);
+      padding: 30px 20px 20px;
+      color: white;
+    }
+    .mentor-name {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 4px;
+      font-family: var(--font-display);
+    }
+    .mentor-company {
+      font-size: 16px;
+      font-weight: 500;
+      opacity: 0.9;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .mentor-company .ms {
+      font-size: 18px;
+    }
+
+    /* CTA inner */
+    .cta-inner { 
+      max-width: 750px; 
+      margin: 0 auto; 
+      position: relative;
+      z-index: 1;
+    }
+    .cta-title {
+      font-family: var(--font-display);
+      font-size: 52px;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 18px;
+    }
+    .cta-sub {
+      font-size: 18px;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 45px;
+    }
+    .btn-cta-primary {
+      background: var(--blue);
+      color: white;
+      padding: 16px 38px;
+      border-radius: 60px;
+      font-size: 17px;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-block;
+      transition: 0.15s;
+    }
+    .btn-cta-primary:hover {
+      background: #1557b0;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(26,115,232,0.4);
+    }
+    .btn-cta-outline {
+      background: transparent;
+      color: white;
+      padding: 16px 38px;
+      border-radius: 60px;
+      font-size: 17px;
+      font-weight: 600;
+      text-decoration: none;
+      border: 1.5px solid rgba(255,255,255,0.3);
+      margin-left: 15px;
+      transition: 0.15s;
+    }
+    .btn-cta-outline:hover {
+      border-color: white;
+      background: rgba(255,255,255,0.05);
+      transform: translateY(-2px);
+    }
+
+    /* Footer */
+    .footer-inner { max-width: 1280px; margin: 0 auto; position: relative; z-index: 1; }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      gap: 50px;
+      margin-bottom: 45px;
+    }
+    .footer-brand span {
+      font-family: var(--font-display);
+      font-size: 26px;
+      font-weight: 600;
+      color: var(--ink);
+      display: block;
+      margin-bottom: 16px;
+    }
+    .footer-brand p { font-size: 14px; color: var(--muted); }
+    .footer-col h5 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+    .footer-col ul li {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 14px;
+      list-style: none;
+      cursor: pointer;
+    }
+    .footer-bottom {
+      padding-top: 28px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+    }
+    .footer-bottom p { font-size: 14px; color: var(--muted); }
+
+    /* Responsive */
+    @media (max-width: 1000px) {
+      .footer-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 700px) {
+      .nav-links { display: none; }
+      .stats-inner { grid-template-columns: 1fr 1fr; gap: 20px; }
+      .stat-item { border-right: none; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .hero-title { font-size: 52px; }
+      .btn-cta-outline { margin-left: 0; margin-top: 15px; display: inline-block; }
+    }
+
+    /* Card color variations */
+    .carousel-card:nth-child(2) .guidance-card .card-icon,
+    .carousel-card:nth-child(2) .career-icon,
+    .carousel-card:nth-child(2) .python-icon,
+    .carousel-card:nth-child(2) .ai-skill { background: var(--red-lt); color: var(--red); }
+    
+    .carousel-card:nth-child(3) .guidance-card .card-icon,
+    .carousel-card:nth-child(3) .career-icon,
+    .carousel-card:nth-child(3) .python-icon,
+    .carousel-card:nth-child(3) .ai-skill { background: var(--yellow-lt); color: #b06000; }
+    
+    .carousel-card:nth-child(4) .guidance-card .card-icon,
+    .carousel-card:nth-child(4) .career-icon,
+    .carousel-card:nth-child(4) .python-icon,
+    .carousel-card:nth-child(4) .ai-skill { background: var(--green-lt); color: var(--green); }
+    
+    .carousel-card:nth-child(5) .guidance-card .card-icon,
+    .carousel-card:nth-child(5) .career-icon,
+    .carousel-card:nth-child(5) .python-icon,
+    .carousel-card:nth-child(5) .ai-skill { background: var(--blue-lt); color: var(--blue); }
+
+    /* Career card backgrounds */
+    .career1 { background-image: url('https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&auto=format'); }
+    .career2 { background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format'); }
+    .career3 { background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&auto=format'); }
+    .career4 { background-image: url('https://www.quytech.com/blog/wp-content/uploads/2020/06/python-web-development.jpg'); }
+    .career5 { background-image: url('https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=800&auto=format'); }
+    .career6 { background-image: url('https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&auto=format'); }
+  </style>
+</head>
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="#" class="logo">
+        <div class="logo-img">
+          <img src="./images/logo.png" style="width: 50px; height: 50px;"/>
+        </div>
+        <span style="color: #202124;">Grozon</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#home"></a></li>
+        <li><a href="#careers">Careers</a></li>
+        <li><a href="#guidance">Guidance</a></li>
+        <li><a href="#ai">AI</a></li>
+        <li><a href="#python">Python</a></li>
+        <li><a href="#mentors">Mentors</a></li>
+        <li><a href="#guidance" class="nav-cta">Get started</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO with horizontal zigzag stripes -->
+  <section id="home" class="hero">
+    <div class="hero-inner">
+      <div class="hero-eyebrow">
+        <span class="ms">rocket_launch</span> India's #1 tech career platform
+      </div>
+      <h1 class="hero-title">
+        Launch your <span class="g-blue">tech career</span>
+        with clarity
+      </h1>
+      <p class="hero-desc">
+        AI-powered career guidance, 1:1 mentorship, and industry-led learning paths to get you hired.
+      </p>
+      <div class="hero-pills">
+        <span class="hero-pill blue">AI Dev</span>
+        <span class="hero-pill red">Python</span>
+        <span class="hero-pill yellow">Data Science</span>
+        <span class="hero-pill green">Cloud</span>
+      </div>
+      <div class="hero-actions">
+        <a href="#careers" class="btn-primary">Explore paths</a>
+        <a href="#guidance" class="btn-outline">Get guidance</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats-strip">
+    <div class="stats-inner">
+      <div class="stat-item"><div class="stat-num">500+</div><div class="stat-label">Students guided</div></div>
+      <div class="stat-item"><div class="stat-num">98%</div><div class="stat-label">Placement rate</div></div>
+      <div class="stat-item"><div class="stat-num">20+</div><div class="stat-label">Career paths</div></div>
+      <div class="stat-item"><div class="stat-num">10+</div><div class="stat-label">Expert mentors</div></div>
+    </div>
+  </div>
+
+  <!-- GUIDANCE CAROUSEL -->
+  <section id="guidance" class="section">
+    <div class="section-inner">
+      <div class="section-head">
+        <span class="eyebrow">Guidance</span>
+        <h2 class="section-title">Career guidance<br>that actually works</h2>
+        <p class="section-sub">Personalized support at every step — from assessment to placement</p>
+      </div>
+      <div class="carousel-container">
+        <div class="carousel-hint">
+          <span class="ms">swipe</span> swipe to explore →
+        </div>
+        <div class="carousel-track">
+          <!-- Guidance Card 1 -->
+          <div class="carousel-card">
+            <div class="guidance-card">
+              <span class="badge">Free</span>
+              <div class="card-icon"><span class="ms">explore</span></div>
+              <h3>Career assessment</h3>
+              <p>Scientific aptitude test to match your interests with the right tech career path.</p>
+              <ul class="guidance-features">
+                <li><span class="ms">check_circle</span>30-min comprehensive test</li>
+                <li><span class="ms">check_circle</span>Personalized career map</li>
+                <li><span class="ms">check_circle</span>Skills gap analysis</li>
+              </ul>
+              <a href="#" class="card-btn">Take assessment <span class="ms">arrow_forward</span></a>
+            </div>
+          </div>
+          <!-- Guidance Card 2 -->
+          <div class="carousel-card">
+            <div class="guidance-card">
+              <span class="badge">Popular</span>
+              <div class="card-icon"><span class="ms">person</span></div>
+              <h3>1:1 counselor sessions</h3>
+              <p>Speak with experienced career counselors every week.</p>
+              <ul class="guidance-features">
+                <li><span class="ms">check_circle</span>45-min weekly sessions</li>
+                <li><span class="ms">check_circle</span>Resume & portfolio review</li>
+                <li><span class="ms">check_circle</span>Interview preparation</li>
+              </ul>
+              <a href="#" class="card-btn">Book free intro <span class="ms">arrow_forward</span></a>
+            </div>
+          </div>
+          <!-- Guidance Card 3 -->
+          <div class="carousel-card">
+            <div class="guidance-card">
+              <span class="badge">New</span>
+              <div class="card-icon"><span class="ms">groups</span></div>
+              <h3>Group workshops</h3>
+              <p>Weekly sessions on career planning and job search strategy.</p>
+              <ul class="guidance-features">
+                <li><span class="ms">check_circle</span>Live weekly webinars</li>
+                <li><span class="ms">check_circle</span>Q&A with industry experts</li>
+                <li><span class="ms">check_circle</span>Peer networking</li>
+              </ul>
+              <a href="#" class="card-btn">Join next session <span class="ms">arrow_forward</span></a>
+            </div>
+          </div>
+          <!-- Guidance Card 4 -->
+          <div class="carousel-card">
+            <div class="guidance-card">
+              <span class="badge">Premium</span>
+              <div class="card-icon"><span class="ms">school</span></div>
+              <h3>Mentorship program</h3>
+              <p>Long-term 1:1 guidance with industry experts for 6 months.</p>
+              <ul class="guidance-features">
+                <li><span class="ms">check_circle</span>Bi-weekly sessions</li>
+                <li><span class="ms">check_circle</span>Project reviews</li>
+                <li><span class="ms">check_circle</span>Career roadmap</li>
+              </ul>
+              <a href="#" class="card-btn">Learn more <span class="ms">arrow_forward</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAREERS CAROUSEL -->
+  <section id="careers" class="section">
+    <div class="section-inner">
+      <div class="section-head">
+        <span class="eyebrow">Career Paths</span>
+        <h2 class="section-title">Paths that shape<br>the future</h2>
+        <p class="section-sub">Each path includes mentorship, real projects & industry certification</p>
+      </div>
+      <div class="carousel-container">
+        <div class="carousel-hint">
+          <span class="ms">swipe</span> swipe to explore →
+        </div>
+        <div class="carousel-track">
+          <!-- Career Card 1 -->
+          <div class="carousel-card">
+            <div class="career-card-image career1">
+              <div class="career-overlay">
+                <span class="career-badge">Most popular</span>
+                <span class="career-number">01</span>
+              </div>
+            </div>
+            <div class="career-content">
+              <div class="career-header">
+                <div class="career-icon"><span class="ms">neurology</span></div>
+                <h3>AI Development</h3>
+              </div>
+              <p class="career-desc">Build intelligent systems, work with LLMs, computer vision, and deploy production-ready AI models.</p>
+              <div class="career-tags">
+                <span class="career-tag">Machine Learning</span>
+                <span class="career-tag">LLMs</span>
+                <span class="career-tag">Computer Vision</span>
+              </div>
+              <div class="career-footer">
+                <span class="career-meta">16 weeks · 1:1 mentor</span>
+                <span class="career-link"><span class="ms">arrow_forward</span></span>
+              </div>
+            </div>
+          </div>
+          <!-- Career Card 2 -->
+          <div class="carousel-card">
+            <div class="career-card-image career2">
+              <div class="career-overlay">
+                <span class="career-badge">In demand</span>
+                <span class="career-number">02</span>
+              </div>
+            </div>
+            <div class="career-content">
+              <div class="career-header">
+                <div class="career-icon"><span class="ms">bar_chart</span></div>
+                <h3>Data Science</h3>
+              </div>
+              <p class="career-desc">Analyze complex data, build predictive models, and derive actionable insights.</p>
+              <div class="career-tags">
+                <span class="career-tag">Pandas</span>
+                <span class="career-tag">SQL</span>
+                <span class="career-tag">Tableau</span>
+              </div>
+              <div class="career-footer">
+                <span class="career-meta">12 weeks · 4 projects</span>
+                <span class="career-link"><span class="ms">arrow_forward</span></span>
+              </div>
+            </div>
+          </div>
+          <!-- Career Card 3 -->
+          <div class="carousel-card">
+            <div class="career-card-image career3">
+              <div class="career-overlay">
+                <span class="career-badge">Certification prep</span>
+                <span class="career-number">03</span>
+              </div>
+            </div>
+            <div class="career-content">
+              <div class="career-header">
+                <div class="career-icon"><span class="ms">cloud</span></div>
+                <h3>Cloud Computing</h3>
+              </div>
+              <p class="career-desc">Architect scalable solutions, master AWS/Azure, and implement CI/CD pipelines.</p>
+              <div class="career-tags">
+                <span class="career-tag">AWS</span>
+                <span class="career-tag">Azure</span>
+                <span class="career-tag">DevOps</span>
+              </div>
+              <div class="career-footer">
+                <span class="career-meta">10 weeks · 3 projects</span>
+                <span class="career-link"><span class="ms">arrow_forward</span></span>
+              </div>
+            </div>
+          </div>
+          <!-- Career Card 4 -->
+          <div class="carousel-card">
+            <div class="career-card-image career4">
+              <div class="career-overlay">
+                <span class="career-badge">Versatile</span>
+                <span class="career-number">04</span>
+              </div>
+            </div>
+            <div class="career-content">
+              <div class="career-header">
+                <div class="career-icon"><span class="ms">code</span></div>
+                <h3>Python Development</h3>
+              </div>
+              <p class="career-desc">Master Python for web development, automation, data analysis, and backend systems.</p>
+              <div class="career-tags">
+                <span class="career-tag">Django</span>
+                <span class="career-tag">Flask</span>
+                <span class="career-tag">FastAPI</span>
+              </div>
+              <div class="career-footer">
+                <span class="career-meta">12 weeks · 5 projects</span>
+                <span class="career-link"><span class="ms">arrow_forward</span></span>
+              </div>
+            </div>
+          </div>
+          <!-- Career Card 5 -->
+          <div class="carousel-card">
+            <div class="career-card-image career5">
+              <div class="career-overlay">
+                <span class="career-badge">High growth</span>
+                <span class="career-number">05</span>
+              </div>
+            </div>
+            <div class="career-content">
+              <div class="career-header">
+                <div class="career-icon"><span class="ms">security</span></div>
+                <h3>Cybersecurity</h3>
+              </div>
+              <p class="career-desc">Protect systems, perform ethical hacking, and build robust security infrastructure.</p>
+              <div class="career-tags">
+                <span class="career-tag">Ethical Hacking</span>
+                <span class="career-tag">SOC</span>
+                <span class="career-tag">CISSP</span>
+              </div>
+              <div class="career-footer">
+                <span class="career-meta">14 weeks · labs</span>
+                <span class="career-link"><span class="ms">arrow_forward</span></span>
+              </div>
+            </div>
+          </div>
+          <!-- Career Card 6 -->
+          <div class="carousel-card">
+            <div class="career-card-image career6">
+              <div class="career-overlay">
+                <span class="career-badge">Comprehensive</span>
+                <span class="career-number">06</span>
+              </div>
+            </div>
+            <div class="career-content">
+              <div class="career-header">
+                <div class="career-icon"><span class="ms">web</span></div>
+                <h3>Full Stack</h3>
+              </div>
+              <p class="career-desc">Build complete web applications with React, Node.js, databases, and modern deployment.</p>
+              <div class="career-tags">
+                <span class="career-tag">React</span>
+                <span class="career-tag">Node.js</span>
+                <span class="career-tag">MongoDB</span>
+              </div>
+              <div class="career-footer">
+                <span class="career-meta">14 weeks · 3 apps</span>
+                <span class="career-link"><span class="ms">arrow_forward</span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI CAROUSEL -->
+  <section id="ai" class="section">
+    <div class="section-inner">
+      <div class="section-head">
+        <span class="eyebrow">AI Deep Dives</span>
+        <h2 class="section-title">AI Development<br>specializations</h2>
+        <p class="section-sub">From fundamentals to cutting-edge LLMs and computer vision</p>
+      </div>
+      <div class="carousel-container">
+        <div class="carousel-hint">
+          <span class="ms">swipe</span> swipe to explore →
+        </div>
+        <div class="carousel-track">
+          <!-- AI Card 1 -->
+          <div class="carousel-card">
+            <div class="ai-img"><img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&auto=format" alt="ML"></div>
+            <div class="ai-body">
+              <h4>Machine Learning</h4>
+              <div class="ai-skills">
+                <span class="ai-skill">scikit-learn</span>
+                <span class="ai-skill">TensorFlow</span>
+                <span class="ai-skill">Regression</span>
+              </div>
+              <p>Supervised/unsupervised learning, model evaluation, feature engineering.</p>
+              <div class="ai-footer">
+                <span class="ai-weeks">12 weeks · 4 projects</span>
+                <a href="#" class="ai-link">Explore <span class="ms">arrow_forward</span></a>
+              </div>
+            </div>
+          </div>
+          <!-- AI Card 2 -->
+          <div class="carousel-card">
+            <div class="ai-img"><img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=500&auto=format" alt="DL"></div>
+            <div class="ai-body">
+              <h4>Deep Learning</h4>
+              <div class="ai-skills">
+                <span class="ai-skill">PyTorch</span>
+                <span class="ai-skill">Keras</span>
+                <span class="ai-skill">CNNs</span>
+              </div>
+              <p>Neural networks, computer vision, NLP and transformers.</p>
+              <div class="ai-footer">
+                <span class="ai-weeks">14 weeks</span>
+                <a href="#" class="ai-link">Explore <span class="ms">arrow_forward</span></a>
+              </div>
+            </div>
+          </div>
+          <!-- AI Card 3 -->
+          <div class="carousel-card">
+            <div class="ai-img"><img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=500&auto=format" alt="LLMs"></div>
+            <div class="ai-body">
+              <h4>Large Language Models</h4>
+              <div class="ai-skills">
+                <span class="ai-skill">GPT API</span>
+                <span class="ai-skill">LangChain</span>
+                <span class="ai-skill">RAG</span>
+              </div>
+              <p>Build AI apps with LLMs, prompt engineering and fine-tuning.</p>
+              <div class="ai-footer">
+                <span class="ai-weeks">8 weeks</span>
+                <a href="#" class="ai-link">Explore <span class="ms">arrow_forward</span></a>
+              </div>
+            </div>
+          </div>
+          <!-- AI Card 4 -->
+          <div class="carousel-card">
+            <div class="ai-img"><img src="https://images.unsplash.com/photo-1562408590-e32931084e23?w=500&auto=format" alt="CV"></div>
+            <div class="ai-body">
+              <h4>Computer Vision</h4>
+              <div class="ai-skills">
+                <span class="ai-skill">OpenCV</span>
+                <span class="ai-skill">YOLO</span>
+                <span class="ai-skill">Segmentation</span>
+              </div>
+              <p>Object detection, image segmentation and real-time CV systems.</p>
+              <div class="ai-footer">
+                <span class="ai-weeks">10 weeks</span>
+                <a href="#" class="ai-link">Explore <span class="ms">arrow_forward</span></a>
+              </div>
+            </div>
+          </div>
+          <!-- AI Card 5 -->
+          <div class="carousel-card">
+            <div class="ai-img"><img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=500&auto=format" alt="MLOps"></div>
+            <div class="ai-body">
+              <h4>MLOps</h4>
+              <div class="ai-skills">
+                <span class="ai-skill">Docker</span>
+                <span class="ai-skill">Kubeflow</span>
+                <span class="ai-skill">CI/CD</span>
+              </div>
+              <p>Deploy, monitor and maintain ML models in production.</p>
+              <div class="ai-footer">
+                <span class="ai-weeks">8 weeks</span>
+                <a href="#" class="ai-link">Explore <span class="ms">arrow_forward</span></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PYTHON CAROUSEL -->
+  <section id="python" class="section">
+    <div class="section-inner">
+      <div class="section-head">
+        <span class="eyebrow">Python Ecosystem</span>
+        <h2 class="section-title">Python specializations</h2>
+        <p class="section-sub">Master Python across all domains — web, data, automation and backend</p>
+      </div>
+      <div class="carousel-container">
+        <div class="carousel-hint">
+          <span class="ms">swipe</span> swipe to explore →
+        </div>
+        <div class="carousel-track">
+          <!-- Python Card 1 -->
+          <div class="carousel-card">
+            <div class="python-card">
+              <div class="python-icon"><span class="ms">code</span></div>
+              <h4>Python for Web</h4>
+              <p>Django, Flask, FastAPI, REST APIs, GraphQL</p>
+              <div class="python-footer">
+                <span class="python-meta">8 weeks · 3 projects</span>
+                <span class="python-arrow"><span class="ms">arrow_forward</span></span>
+              </div>
+            </div>
+          </div>
+          <!-- Python Card 2 -->
+          <div class="carousel-card">
+            <div class="python-card">
+              <div class="python-icon"><span class="ms">trending_up</span></div>
+              <h4>Python for Data</h4>
+              <p>Pandas, NumPy, Matplotlib, Jupyter, Scipy</p>
+              <div class="python-footer">
+                <span class="python-meta">10 weeks · 4 projects</span>
+                <span class="python-arrow"><span class="ms">arrow_forward</span></span>
+              </div>
+            </div>
+          </div>
+          <!-- Python Card 3 -->
+          <div class="carousel-card">
+            <div class="python-card">
+              <div class="python-icon"><span class="ms">smart_toy</span></div>
+              <h4>Python Automation</h4>
+              <p>Scripting, web scraping, Selenium, BeautifulSoup</p>
+              <div class="python-footer">
+                <span class="python-meta">6 weeks · 5 tools</span>
+                <span class="python-arrow"><span class="ms">arrow_forward</span></span>
+              </div>
+            </div>
+          </div>
+          <!-- Python Card 4 -->
+          <div class="carousel-card">
+            <div class="python-card">
+              <div class="python-icon"><span class="ms">settings</span></div>
+              <h4>Python Backend</h4>
+              <p>Async, databases, microservices, testing</p>
+              <div class="python-footer">
+                <span class="python-meta">8 weeks · 2 backends</span>
+                <span class="python-arrow"><span class="ms">arrow_forward</span></span>
+              </div>
+            </div>
+          </div>
+          <!-- Python Card 5 -->
+          <div class="carousel-card">
+            <div class="python-card">
+              <div class="python-icon"><span class="ms">analytics</span></div>
+              <h4>Python for ML</h4>
+              <p>Scikit-learn, TensorFlow, feature engineering</p>
+              <div class="python-footer">
+                <span class="python-meta">10 weeks · 4 projects</span>
+                <span class="python-arrow"><span class="ms">arrow_forward</span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENTORS CAROUSEL - REDESIGNED with name and company on image -->
+  <section id="mentors" class="section">
+    <div class="section-inner">
+      <div class="section-head">
+        <span class="eyebrow">Mentors</span>
+        <h2 class="section-title">Learn from the<br>best in industry</h2>
+        <p class="section-sub">Industry professionals actively working in their fields</p>
+      </div>
+      <div class="carousel-container">
+        <div class="carousel-hint">
+          <span class="ms">swipe</span> swipe to explore →
+        </div>
+        <div class="carousel-track">
+          <!-- Mentor Card 1 -->
+          <div class="carousel-card">
+            <div class="mentor-card">
+              <img class="mentor-img" src="./images/Abisheik.jpeg" alt="Abisheik">
+              <div class="mentor-overlay">
+                <div class="mentor-name">Abisheik</div>
+                <div class="mentor-company">
+                  <span class="ms">business_center</span> Mozenhub
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Mentor Card 2 -->
+          <div class="carousel-card">
+            <div class="mentor-card">
+              <img class="mentor-img" src="./images/ratik.png" alt="ratik">
+              <div class="mentor-overlay">
+                <div class="mentor-name">Ratik</div>
+                <div class="mentor-company">
+                  <span class="ms">business_center</span> Fortinet
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Mentor Card 3 -->
+          <div class="carousel-card">
+            <div class="mentor-card">
+              <img class="mentor-img" src="./images/rahul.jpeg" alt="Rahul">
+              <div class="mentor-overlay">
+                <div class="mentor-name">Rahul</div>
+                <div class="mentor-company">
+                  <span class="ms">business_center</span> Cognizant
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Mentor Card 4 -->
+          <div class="carousel-card">
+            <div class="mentor-card">
+              <img class="mentor-img" src="./images/sai.jpeg" alt="Sai">
+              <div class="mentor-overlay">
+                <div class="mentor-name">Sneha Patel</div>
+                <div class="mentor-company">
+                  <span class="ms">business_center</span> Grozon
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Mentor Card 5 -->
+          <div class="carousel-card">
+            <div class="mentor-card">
+              <img class="mentor-img" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&auto=format" alt="Arjun Kumar">
+              <div class="mentor-overlay">
+                <div class="mentor-name">Arjun Kumar</div>
+                <div class="mentor-company">
+                  <span class="ms">business_center</span> Netflix
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="cta" class="cta-section">
+    <div class="cta-inner">
+      <h2 class="cta-title">Ready to start your<br>career journey?</h2>
+      <p class="cta-sub">Choose your path, get mentored, launch your future.</p>
+      <div>
+        <a href="#" class="btn-cta-primary">Explore all 20+ paths</a>
+        <a href="#" class="btn-cta-outline">Talk to a counselor</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <span>Grozon</span>
+          <p>Career-focused tech education with industry mentors and personalized guidance. Founded by Karthik & Vignesh to help students find their dream careers.</p>
+        </div>
+        <div class="footer-col">
+          <h5>Career paths</h5>
+          <ul><li>AI/ML</li><li>Python</li><li>Data science</li><li>Cloud</li><li>Cybersecurity</li></ul>
+        </div>
+        <div class="footer-col">
+          <h5>Guidance</h5>
+          <ul><li>Career assessment</li><li>1:1 counseling</li><li>Workshops</li><li>Resume review</li></ul>
+        </div>
+        <div class="footer-col">
+          <h5>Contact</h5>
+          <ul><li>grozon.edtech@gmail.com</li><li>+91-9025286044</li><li>Book a session</li></ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Grozon</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Carousel drag functionality (scrollbar hidden) -->
+  <script>
+    (function() {
+      const carousels = document.querySelectorAll('.carousel-track');
+      carousels.forEach(carousel => {
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        carousel.addEventListener('mousedown', (e) => {
+          isDown = true;
+          carousel.classList.add('active');
+          startX = e.pageX - carousel.offsetLeft;
+          scrollLeft = carousel.scrollLeft;
+        });
+        carousel.addEventListener('mouseleave', () => {
+          isDown = false;
+          carousel.classList.remove('active');
+        });
+        carousel.addEventListener('mouseup', () => {
+          isDown = false;
+          carousel.classList.remove('active');
+        });
+        carousel.addEventListener('mousemove', (e) => {
+          if (!isDown) return;
+          e.preventDefault();
+          const x = e.pageX - carousel.offsetLeft;
+          const walk = (x - startX) * 1.5;
+          carousel.scrollLeft = scrollLeft - walk;
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
