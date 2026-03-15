@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/title-logo.jpeg">
   <title>Grozon</title>
   <!-- Google Fonts: Inter + Space Grotesk + Poppins for logo -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -295,7 +296,7 @@
     .logo {
       font-family: var(--font-logo);
       font-size: 24px;
-      font-weight: 50;
+      font-weight: 700;
       text-decoration: none;
       color: var(--ink);
       letter-spacing: -0.3px;
@@ -428,15 +429,16 @@
     .stats-inner {
       max-width: 1280px;
       margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      display: flex;
+      justify-content: center;
       position: relative;
       z-index: 1;
     }
     .stat-item {
       text-align: center;
-      padding: 0 24px;
+      padding: 0 28px;
       border-right: 1px solid var(--border);
+      min-width: 180px;
     }
     .stat-item:last-child { border-right: none; }
     .stat-num {
@@ -970,17 +972,199 @@
     }
     .footer-bottom p { font-size: 14px; color: var(--muted); }
 
-    /* Responsive */
+    /* ===== RESPONSIVE FIXES ===== */
     @media (max-width: 1000px) {
       .footer-grid { grid-template-columns: repeat(2, 1fr); }
     }
+    
     @media (max-width: 700px) {
       .nav-links { display: none; }
       .stats-inner { grid-template-columns: 1fr 1fr; gap: 20px; }
-      .stat-item { border-right: none; }
+      .stat-item { 
+        border-right: none; 
+        padding: 10px;
+      }
       .footer-grid { grid-template-columns: 1fr; }
       .hero-title { font-size: 52px; }
       .btn-cta-outline { margin-left: 0; margin-top: 15px; display: inline-block; }
+    }
+    
+    @media (max-width: 600px) {
+      .carousel-card {
+        flex: 0 0 85%;
+        max-width: 280px;
+      }
+      .section-title {
+        font-size: 36px;
+      }
+    }
+    
+    @media (max-width: 500px) {
+      .hero-title {
+        font-size: 48px;
+      }
+      
+      .mentor-card {
+        height: 300px;
+      }
+      
+      .mentor-name {
+        font-size: 20px;
+      }
+      
+      .mentor-company {
+        font-size: 14px;
+      }
+      
+      .cta-actions {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+      }
+      
+      .btn-cta-outline {
+        margin-left: 0;
+      }
+      
+      .section-title {
+        font-size: 32px;
+      }
+      
+      .stat-num {
+        font-size: 36px;
+      }
+      
+      .stat-label {
+        font-size: 12px;
+      }
+    }
+    
+    @media (max-width: 400px) {
+      .hero-title {
+        font-size: 42px;
+        letter-spacing: -1px;
+      }
+      
+      .logo {
+        font-size: 20px;
+      }
+      
+      .logo-img img {
+        width: 35px;
+        height: 35px;
+      }
+      
+      .stat-num {
+        font-size: 32px;
+      }
+      
+      .stat-label {
+        font-size: 11px;
+      }
+      
+      .section {
+        padding: 60px 16px;
+      }
+      
+      .hero {
+        padding: 50px 16px 60px;
+      }
+      
+      .hero-eyebrow {
+        font-size: 12px;
+        padding: 6px 16px;
+      }
+      
+      .hero-desc {
+        font-size: 16px;
+      }
+      
+      .hero-pill {
+        font-size: 12px;
+        padding: 6px 16px;
+      }
+      
+      .btn-primary, .btn-outline {
+        padding: 12px 24px;
+        font-size: 14px;
+      }
+      
+      .cta-title {
+        font-size: 36px;
+      }
+      
+      .cta-sub {
+        font-size: 16px;
+      }
+      
+      .btn-cta-primary, .btn-cta-outline {
+        padding: 14px 28px;
+        font-size: 15px;
+        width: 100%;
+        max-width: 280px;
+      }
+      
+      .guidance-card {
+        padding: 24px 20px;
+      }
+      
+      .guidance-card h3 {
+        font-size: 20px;
+      }
+      
+      .guidance-card p {
+        font-size: 14px;
+      }
+      
+      .guidance-features li {
+        font-size: 13px;
+      }
+      
+      .career-content h3 {
+        font-size: 20px;
+      }
+      
+      .career-desc {
+        font-size: 13px;
+      }
+      
+      .career-tag {
+        font-size: 10px;
+        padding: 3px 10px;
+      }
+      
+      .ai-body h4 {
+        font-size: 20px;
+      }
+      
+      .ai-skill {
+        font-size: 10px;
+        padding: 3px 10px;
+      }
+      
+      .python-card h4 {
+        font-size: 20px;
+      }
+      
+      .python-card p {
+        font-size: 13px;
+      }
+      
+      .footer-grid {
+        gap: 30px;
+      }
+      
+      .footer-brand span {
+        font-size: 22px;
+      }
+      
+      .footer-col h5 {
+        font-size: 14px;
+      }
+      
+      .footer-col ul li {
+        font-size: 13px;
+      }
     }
 
     /* Card color variations */
@@ -1019,12 +1203,12 @@
     <div class="nav-inner">
       <a href="#" class="logo">
         <div class="logo-img">
-          <img src="./images/logo.png" style="width: 50px; height: 50px;"/>
+          <img src="./images/logo (2).png" style="width: 50px; height: 50px;" alt="Grozon Logo">
         </div>
         <span style="color: #202124;">Grozon</span>
       </a>
       <ul class="nav-links">
-        <li><a href="#home"></a></li>
+        <li><a href="#home">Home</a></li>
         <li><a href="#careers">Careers</a></li>
         <li><a href="#guidance">Guidance</a></li>
         <li><a href="#ai">AI</a></li>
@@ -1065,7 +1249,7 @@
   <div class="stats-strip">
     <div class="stats-inner">
       <div class="stat-item"><div class="stat-num">500+</div><div class="stat-label">Students guided</div></div>
-      <div class="stat-item"><div class="stat-num">98%</div><div class="stat-label">Placement rate</div></div>
+    
       <div class="stat-item"><div class="stat-num">20+</div><div class="stat-label">Career paths</div></div>
       <div class="stat-item"><div class="stat-num">10+</div><div class="stat-label">Expert mentors</div></div>
     </div>
@@ -1552,7 +1736,7 @@
             <div class="mentor-card">
               <img class="mentor-img" src="./images/sai.jpeg" alt="Sai">
               <div class="mentor-overlay">
-                <div class="mentor-name">Sneha Patel</div>
+                <div class="mentor-name">Sainath</div>
                 <div class="mentor-company">
                   <span class="ms">business_center</span> Grozon
                 </div>
@@ -1560,15 +1744,7 @@
             </div>
           </div>
           <!-- Mentor Card 5 -->
-          <div class="carousel-card">
-            <div class="mentor-card">
-              <img class="mentor-img" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&auto=format" alt="Arjun Kumar">
-              <div class="mentor-overlay">
-                <div class="mentor-name">Arjun Kumar</div>
-                <div class="mentor-company">
-                  <span class="ms">business_center</span> Netflix
-                </div>
-              </div>
+         
             </div>
           </div>
         </div>
@@ -1581,7 +1757,7 @@
     <div class="cta-inner">
       <h2 class="cta-title">Ready to start your<br>career journey?</h2>
       <p class="cta-sub">Choose your path, get mentored, launch your future.</p>
-      <div>
+      <div class="cta-actions">
         <a href="#" class="btn-cta-primary">Explore all 20+ paths</a>
         <a href="#" class="btn-cta-outline">Talk to a counselor</a>
       </div>
